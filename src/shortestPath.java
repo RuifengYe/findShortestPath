@@ -1,21 +1,11 @@
 import java.io.*;
-import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.net.DatagramPacket;
-import java.net.DatagramSocket;
-import java.net.Inet4Address;
-import java.net.InetAddress;
 import java.util.*;
-import java.util.concurrent.*;
 public class shortestPath {
     public static void main(String[] args) {
-        graph g=new graph("D://Java projects//javaTest//graph.txt");
-
-        System.out.println(g.findShortestPath("A","B"));
-
+        graph g=new graph("D://Java projects//findShortestPath//graph.txt");
+        System.out.println(g.findShortestPath("A","C"));
     }
 }
-
 
 class Vertex implements Comparable<Vertex>{
     String name;
@@ -85,19 +75,24 @@ class graph{
             Vertex tmp=queue.poll();
             for(adjacentVertex adj:tmp.adj){
                 Vertex adjacent=recorder.get(adj.name);
-                if(tmp.distance+adjacent.distance<adjacent.distance)
-                    adjacent.distance=tmp.distance+adjacent.distance;
+                if(tmp.distance+adj.weight<adjacent.distance) {
+                    adjacent.distance = tmp.distance + adj.weight;
+                    ongoing.remove(tmp);
+                    ongoing.offer(tmp);
+                }
             }
-            Vertex nextStart=ongoing.poll();
-            System.out.println(nextStart.name);
-            queue.offer(nextStart);
-            done.add(nextStart);
+            if(!ongoing.isEmpty()) {
+                Vertex nextStart = ongoing.poll();
+                queue.offer(nextStart);
+                done.add(nextStart);
+            }else
+                break;
         }
         for(Vertex tmp:done){
             if(tmp.name.equals(endPoint))
                 return tmp.distance;
         }
-        return -1;
+        return Integer.MIN_VALUE;
     }
 }
 
