@@ -9,34 +9,13 @@ import java.util.*;
 import java.util.concurrent.*;
 public class shortestPath {
     public static void main(String[] args) {
-//        edge firstEdge=new edge(0,1,12);
-//        edge secondEdge=new edge(1,2,10);
-//        edge thirdEdge=new edge(2,3,3);
-//        edge fourthEdge=new edge(3,4,4);
-//        edge fifthEdge=new edge(4,5,2);
-//        edge sixthEdge=new edge(5,6,9);
-//        edge seventhEdge=new edge(0,6,14);
-//        edge eigthEdge=new edge(0,5,16);
-//        edge ninthEdge=new edge(1,5,7);
-//        edge tenthEdge=new edge(2,5,6);
-//        edge eleventhEdge=new edge(2,4,5);
-//        edge twelfthEdge=new edge (4,6,8);
         graph g=new graph("D://Java projects//javaTest//graph.txt");
 
         System.out.println(g.findShortestPath("A","B"));
 
     }
 }
-class edge{
-    int start;
-    int end;
-    int weight;
-    public edge(int start,int end,int weight){
-        this.start=start;
-        this.end=end;
-        this.weight=weight;
-    }
-}
+
 
 class Vertex implements Comparable<Vertex>{
     String name;
